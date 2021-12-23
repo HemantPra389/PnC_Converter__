@@ -11,17 +11,17 @@ class Conversion {
     return result;
   }
 
-  static double find_combination(double n, double r) {
+  static String find_combination(n,r) {
     double numerator = find_factorial(n);
     double denominator = find_factorial(r) * find_factorial(n - r);
     double result = (numerator / denominator);
-    return result;
+    return result.toString();
   }
 
-  static double find_permutation(double n, double r) {
+  static String find_permutation(n,r) {
     double numerator = find_factorial(n);
     double denominator = find_factorial(n - r);
     double result = numerator / denominator;
-    return result;
+    return result.toString();
   }
 }

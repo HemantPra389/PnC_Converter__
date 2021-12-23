@@ -14,13 +14,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String permutation = Conversion.n.toString();
+  String combination = Conversion.r.toString();
+
+  bool mybtn = false;
+
   @override
   Widget build(BuildContext context) {
-    double permutation = 0;
-    double combination = 0;
-
-    double n = 0;
-    double r = 0;
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -58,7 +58,11 @@ class _MyAppState extends State<MyApp> {
                         maxLength: 15,
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
-                          n = double.parse(value);
+                          if (value.isEmpty) {
+                            Conversion.n = 1;
+                          } else {
+                            Conversion.n = double.parse(value);
+                          }
                         },
                       ),
                     ),
@@ -73,7 +77,11 @@ class _MyAppState extends State<MyApp> {
                         maxLength: 15,
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
-                          r = double.parse(value);
+                          if (value.isEmpty) {
+                            Conversion.r = 1;
+                          } else {
+                            Conversion.r = double.parse(value);
+                          }
                         },
                       ),
                     ),
@@ -85,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Permutation is: $n',
+                        'Permutation is: $permutation',
                         style: const TextStyle(
                           fontSize: 30,
                           fontFamily: 'SSPB',
@@ -105,10 +113,15 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    setState() {
-                      combination = Conversion.find_combination(n, r);
-                      permutation = Conversion.find_permutation(n, r);
-                    }
+                    setState(() {
+                      mybtn = !mybtn;
+                      if (Conversion.n >= Conversion.r) {
+                        permutation = Conversion.find_permutation(
+                            Conversion.n, Conversion.r);
+                        combination = Conversion.find_combination(
+                            Conversion.n, Conversion.r);
+                      } else {}
+                    });
                   },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 17, vertical: 11),
