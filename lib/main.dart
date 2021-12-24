@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pnc_converter/conversion.dart';
-import 'dart:ui';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String permutation = Conversion.n.toString();
   String combination = Conversion.r.toString();
-
+  String errormessage = "";
   bool mybtn = false;
 
   @override
@@ -53,7 +52,7 @@ class _MyAppState extends State<MyApp> {
                         decoration: const InputDecoration(
                             labelText: 'Enter n',
                             border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.person),
+                            prefixIcon: Icon(Icons.exposure_plus_1),
                             labelStyle: TextStyle(fontSize: 16)),
                         maxLength: 15,
                         keyboardType: TextInputType.number,
@@ -72,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                         decoration: const InputDecoration(
                             labelText: 'Enter r',
                             border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.person),
+                            prefixIcon: Icon(Icons.exposure_plus_1),
                             labelStyle: TextStyle(fontSize: 16)),
                         maxLength: 15,
                         keyboardType: TextInputType.number,
@@ -88,24 +87,31 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 SizedBox(
-                  height: 100,
+                  height: 150,
+                  width: 340,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        'Permutation is: $permutation',
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'SSPB',
-                          color: Colors.blueGrey,
+                      Flexible(
+                        child: Text(
+                          permutation,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'SSPB',
+                            color: Colors.blueGrey,
+                          ),
                         ),
                       ),
-                      Text(
-                        "Combination is: $combination",
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'SSPB',
-                          color: Colors.blueGrey,
+                      Flexible(
+                        child: Text(
+                          combination,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'SSPB',
+                            color: Colors.blueGrey,
+                          ),
                         ),
                       ),
                     ],
@@ -115,12 +121,10 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     setState(() {
                       mybtn = !mybtn;
-                      if (Conversion.n >= Conversion.r) {
-                        permutation = Conversion.find_permutation(
-                            Conversion.n, Conversion.r);
-                        combination = Conversion.find_combination(
-                            Conversion.n, Conversion.r);
-                      } else {}
+                      permutation = Conversion.find_permutation(
+                          Conversion.n, Conversion.r);
+                      combination = Conversion.find_combination(
+                          Conversion.n, Conversion.r);
                     });
                   },
                   child: const Padding(
@@ -137,7 +141,6 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-        drawer: const Drawer(),
       ),
     );
   }
