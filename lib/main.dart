@@ -15,7 +15,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String permutation = Conversion.n.toString();
   String combination = Conversion.r.toString();
-  String errormessage = "";
   bool mybtn = false;
 
   @override
